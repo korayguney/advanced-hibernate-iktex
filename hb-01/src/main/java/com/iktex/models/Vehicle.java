@@ -1,9 +1,32 @@
 package com.iktex.models;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String v_model;
     private int v_year;
     private String v_plate;
+
+    @ManyToOne
+    private Customer customer;
+
+    @ManyToMany
+    private List<Accident> accidentList = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Vehicle(String v_model, int v_year, String v_plate) {
         this.v_model = v_model;
@@ -36,6 +59,22 @@ public class Vehicle {
 
     public void setV_plate(String v_plate) {
         this.v_plate = v_plate;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Accident> getAccidentList() {
+        return accidentList;
+    }
+
+    public void setAccidentList(List<Accident> accidentList) {
+        this.accidentList = accidentList;
     }
 
     @Override

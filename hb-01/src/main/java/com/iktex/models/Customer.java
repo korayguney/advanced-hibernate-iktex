@@ -1,11 +1,23 @@
 package com.iktex.models;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String firstName;
     private String lastName;
     private String address;
     private Long ssid;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Vehicle> vehicleList = new ArrayList<>();
 
     public Customer(String firstName, String lastName, String address, Long ssid, String phoneNumber) {
         this.firstName = firstName;
@@ -55,6 +67,14 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public void setVehicleList(List<Vehicle> vehicleList) {
+        this.vehicleList = vehicleList;
     }
 
     @Override
