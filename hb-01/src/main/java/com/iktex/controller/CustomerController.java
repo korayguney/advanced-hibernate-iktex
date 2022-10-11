@@ -12,5 +12,13 @@ public class CustomerController {
         return customerService.findAll();
     }
 
+    public Customer findCustomer(int id) {
+        return customerService.findById(id);
+    }
+
+    public void saveCustomer(Customer customer) {
+        customerService.saveToDatabase(customer);
+    }
+
 
 }

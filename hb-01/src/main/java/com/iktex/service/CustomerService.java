@@ -21,12 +21,21 @@ public class CustomerService implements CustomerRepository {
 
     @Override
     public Customer findById(int id) {
-        return null;
+        return em.find(Customer.class, id);
     }
 
     @Override
-    public void saveToDatabase(Customer object) {
-
+    public void saveToDatabase(Customer customer) {
+        try {
+            em.getTransaction().begin();
+            em.persist(customer);
+            em.getTransaction().commit();
+            System.out.println("Customer saved...");
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override

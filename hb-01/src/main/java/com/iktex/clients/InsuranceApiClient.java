@@ -10,13 +10,19 @@ import java.time.Month;
 import java.util.Objects;
 
 public class InsuranceApiClient {
+
     public static void main(String[] args) {
-
-
-        if(checkTestData()) persistTestData();
         CustomerController controller = new CustomerController();
-        controller.findAllCustomer().forEach(System.out::println);
 
+
+        if (checkTestData()) persistTestData();
+        // getCustomerList(controller);
+        //System.out.println(controller.findCustomer(1));
+        controller.saveCustomer(new Customer("Mustafa", "Yagmur", "Istanbul", 2345678L, "123423242"));
+    }
+
+    private static void getCustomerList(CustomerController controller) {
+        controller.findAllCustomer().forEach(System.out::println);
     }
 
     private static boolean checkTestData() {
@@ -29,11 +35,11 @@ public class InsuranceApiClient {
         Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, "345324523523");
         Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, "777654643563");
 
-        Vehicle car1 = new Car("Hyundai Accent", 2020, "34VG4555" , "yellow");
-        Vehicle car2 = new Car("Honda Accord", 2018, "34VG111" , "black");
-        Vehicle moto1 = new MotorCycle("Yamaha", 2015, "06TY555" , 222.55);
-        Vehicle moto2 = new MotorCycle("Yamakazi", 2018, "35AA555" , 145.3);
-        Vehicle moto3 = new MotorCycle("Kawasaki", 2022, "01TY355" , 250.44);
+        Vehicle car1 = new Car("Hyundai Accent", 2020, "34VG4555", "yellow");
+        Vehicle car2 = new Car("Honda Accord", 2018, "34VG111", "black");
+        Vehicle moto1 = new MotorCycle("Yamaha", 2015, "06TY555", 222.55);
+        Vehicle moto2 = new MotorCycle("Yamakazi", 2018, "35AA555", 145.3);
+        Vehicle moto3 = new MotorCycle("Kawasaki", 2022, "01TY355", 250.44);
 
         car1.setCustomer(customer1);
         car2.setCustomer(customer2);
