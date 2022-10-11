@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(indexes = {
-        @Index(columnList = "ssid"),
-        @Index(name = "ssid_index", columnList = "ssid", unique = true),
-        @Index(name = "uniqueMultiIndex", columnList = "ssid, phoneNumber", unique = true)
-})
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "UniqueAddress", columnNames = {"address" }),
+        @UniqueConstraint(name = "UniqueSsidAndPhone", columnNames = {"phoneNumber", "ssid" })})
 public class Customer {
 
     @Id
