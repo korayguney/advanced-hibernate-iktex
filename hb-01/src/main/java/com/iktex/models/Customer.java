@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(indexes = {
+        @Index(columnList = "ssid"),
+        @Index(name = "ssid_index", columnList = "ssid", unique = true),
+        @Index(name = "uniqueMultiIndex", columnList = "ssid, phoneNumber", unique = true)
+})
 public class Customer {
 
     @Id
@@ -13,6 +18,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String address;
+    @Column(unique = true)
     private Long ssid;
     private String phoneNumber;
 
@@ -27,7 +33,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Customer(){}
+    public Customer() {
+    }
 
     public String getFirstName() {
         return firstName;
