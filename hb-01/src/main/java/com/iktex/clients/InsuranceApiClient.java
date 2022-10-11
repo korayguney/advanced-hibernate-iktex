@@ -12,9 +12,10 @@ import java.util.Objects;
 public class InsuranceApiClient {
     public static void main(String[] args) {
 
+
         if(checkTestData()) persistTestData();
         CustomerController controller = new CustomerController();
-        controller.findAllCustomer().stream().forEach(System.out::println);
+        controller.findAllCustomer().forEach(System.out::println);
 
     }
 
