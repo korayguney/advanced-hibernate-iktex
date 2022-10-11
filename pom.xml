@@ -17,6 +17,7 @@
 
     <modules>
         <module>hb-01</module>
+        <module>hb-02</module>
     </modules>
 
     <dependencies>
