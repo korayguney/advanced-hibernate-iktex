@@ -14,19 +14,11 @@ public class Vehicle {
     private int v_year;
     private String v_plate;
 
-    @ManyToOne
-    private Customer customer;
-
     @ManyToMany
     private List<Accident> accidentList = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ManyToOne
+    private Customer customer;
 
     public Vehicle(String v_model, int v_year, String v_plate) {
         this.v_model = v_model;
@@ -35,6 +27,14 @@ public class Vehicle {
     }
 
     public Vehicle() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getV_model() {
@@ -61,20 +61,20 @@ public class Vehicle {
         this.v_plate = v_plate;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public List<Accident> getAccidentList() {
         return accidentList;
     }
 
     public void setAccidentList(List<Accident> accidentList) {
         this.accidentList = accidentList;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override

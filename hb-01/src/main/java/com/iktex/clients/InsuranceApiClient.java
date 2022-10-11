@@ -1,5 +1,6 @@
 package com.iktex.clients;
 
+import com.iktex.controller.CustomerController;
 import com.iktex.models.*;
 import com.iktex.utils.EntityManagerUtils;
 
@@ -11,6 +12,18 @@ import java.util.Objects;
 public class InsuranceApiClient {
     public static void main(String[] args) {
 
+        if(checkTestData()) persistTestData();
+        CustomerController controller = new CustomerController();
+        controller.findAllCustomer().stream().forEach(System.out::println);
+
+    }
+
+    private static boolean checkTestData() {
+        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+        return Objects.isNull(em.find(Customer.class, 1));
+    }
+
+    private static void persistTestData() {
         Customer customer1 = new Customer("Ali", "Veli", "Tuzla Istanbul", 111111111L, "123423242");
         Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, "345324523523");
         Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, "777654643563");
@@ -56,8 +69,6 @@ public class InsuranceApiClient {
             em.persist(accident2);
             em.persist(accident3);
 
-            if(Objects.nonNull(customer1)) throw new RuntimeException("exception occured...");
-
             em.getTransaction().commit();
             System.out.println("All data persisted...");
         } catch (Exception e) {
@@ -66,7 +77,5 @@ public class InsuranceApiClient {
         } finally {
             EntityManagerUtils.closeEntityManager(em);
         }
-
-
     }
 }

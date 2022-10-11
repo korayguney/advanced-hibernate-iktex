@@ -16,7 +16,7 @@ public class Customer {
     private Long ssid;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Vehicle> vehicleList = new ArrayList<>();
 
     public Customer(String firstName, String lastName, String address, Long ssid, String phoneNumber) {
