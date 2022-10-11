@@ -8,7 +8,8 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cust_generator")
+    @SequenceGenerator(name = "cust_generator", sequenceName = "cust_seq", allocationSize = 1)
     private int id;
     private String firstName;
     private String lastName;
@@ -27,7 +28,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Customer(){}
+    public Customer() {
+    }
 
     public String getFirstName() {
         return firstName;

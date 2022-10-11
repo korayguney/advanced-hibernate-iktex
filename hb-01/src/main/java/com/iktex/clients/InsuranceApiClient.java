@@ -64,6 +64,9 @@ public class InsuranceApiClient {
 
         try {
             em.getTransaction().begin();
+            em.persist(customer1);
+            em.persist(customer2);
+            em.persist(customer3);
 
             em.persist(car1);
             em.persist(car2);
@@ -71,9 +74,6 @@ public class InsuranceApiClient {
             em.persist(moto2);
             em.persist(moto3);
 
-            em.persist(customer1);
-            em.persist(customer2);
-            em.persist(customer3);
 
             em.persist(accident1);
             em.persist(accident2);

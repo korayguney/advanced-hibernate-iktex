@@ -8,7 +8,8 @@ import java.util.List;
 @Entity
 public class Accident {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "acc_generator")
+    @TableGenerator(name = " acc_generator", table = "acc_generator", allocationSize = 1)
     private Long id;
     private LocalDate accidentDate;
 
