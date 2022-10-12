@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 import java.util.Objects;
 
 public class InsuranceApiClient {
@@ -34,9 +35,13 @@ public class InsuranceApiClient {
     }
 
     private static void persistTestData() {
-        Customer customer1 = new Customer("Koray", "Veli", "Tuzla Istanbul", 111111111L, 123423242L);
-        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, 345324523523L);
-        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, 777654643563L);
+        List<String> phoneNumbers1 = List.of("111111", "2222222");
+        List<String> phoneNumbers2 = List.of("11541111", "432432423", "7475437653");
+        List<String> phoneNumbers3 = List.of("657657", "222226364322");
+
+        Customer customer1 = new Customer("Koray", "Veli", "Tuzla Istanbul", 111111111L, phoneNumbers1);
+        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, phoneNumbers2);
+        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, phoneNumbers3);
 
         customer1.setCreatedDate(LocalDateTime.now());
         customer1.setUpdatedDate(LocalDateTime.now());

@@ -14,19 +14,18 @@ public class Customer extends AbstractBaseClass {
     private String lastName;
     private String address;
     private Long ssid;
-    // @Column(name = "pnumber", columnDefinition = "VARCHAR(100) NOT NULL")
-    @Basic(fetch = FetchType.LAZY)
-    private long phoneNumber;
+    @ElementCollection
+    private List<String> phoneNumbers = new ArrayList<>();
 
     @OneToMany(mappedBy = "customer")
     private List<Vehicle> vehicleList = new ArrayList<>();
 
-    public Customer(String firstName, String lastName, String address, Long ssid, long phoneNumber) {
+    public Customer(String firstName, String lastName, String address, Long ssid, List<String> phoneNumbers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.ssid = ssid;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumbers = phoneNumbers;
     }
 
     public Customer() {
@@ -64,12 +63,12 @@ public class Customer extends AbstractBaseClass {
         this.ssid = ssid;
     }
 
-    public long getPhoneNumber() {
-        return phoneNumber;
+    public List<String> getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumbers(List<String> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
     public List<Vehicle> getVehicleList() {
@@ -102,7 +101,6 @@ public class Customer extends AbstractBaseClass {
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", ssid=" + ssid +
-                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }
