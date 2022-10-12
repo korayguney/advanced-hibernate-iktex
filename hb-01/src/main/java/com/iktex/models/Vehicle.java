@@ -2,7 +2,9 @@ package com.iktex.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -18,7 +20,10 @@ public class Vehicle {
     private String v_plate;
 
     @ManyToMany
-    private List<Accident> accidentList = new ArrayList<>();
+    @JoinTable(name = "vehicle_accident",
+            joinColumns = @JoinColumn(name = "fk_vehicle"),
+            inverseJoinColumns = {@JoinColumn(name = "fk_accident")})
+    private Set<Accident> accidentList = new HashSet<>();
 
     @ManyToOne
     private Customer customer;
@@ -64,11 +69,11 @@ public class Vehicle {
         this.v_plate = v_plate;
     }
 
-    public List<Accident> getAccidentList() {
+    public Set<Accident> getAccidentList() {
         return accidentList;
     }
 
-    public void setAccidentList(List<Accident> accidentList) {
+    public void setAccidentList(Set<Accident> accidentList) {
         this.accidentList = accidentList;
     }
 

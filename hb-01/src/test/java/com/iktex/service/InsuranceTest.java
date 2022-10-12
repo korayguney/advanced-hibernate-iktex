@@ -1,5 +1,6 @@
 package com.iktex.service;
 
+import com.iktex.models.Address;
 import com.iktex.models.Customer;
 import com.iktex.models.Vehicle;
 import org.junit.jupiter.api.*;
@@ -45,6 +46,7 @@ public class InsuranceTest {
     //}
 
     @Test
+    @Disabled
     void updateCustomerEntityTest() {
         try {
             em.getTransaction().begin();
@@ -58,6 +60,23 @@ public class InsuranceTest {
         } finally {
             em.close();
         }
+    }
+
+    @Test
+    public void cascadeTest() {
+        // given
+        Customer customer = new Customer("Mahmut", "Hoca", 3232323L, 342432L);
+        Address address = new Address("details test...");
+        customer.setAddress(address);
+
+        // when
+        em.getTransaction().begin();
+        em.persist(address);
+        em.persist(customer);
+        em.getTransaction().commit();
+
+        // then
+
     }
 
 }
