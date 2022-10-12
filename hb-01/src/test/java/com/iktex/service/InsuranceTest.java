@@ -1,6 +1,7 @@
 package com.iktex.service;
 
 import com.iktex.models.Vehicle;
+import org.hibernate.Session;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ public class InsuranceTest {
 
     @BeforeAll
     public static void setup() {
-        emf = Persistence.createEntityManagerFactory("testPU");
+        emf = Persistence.createEntityManagerFactory("mysqlPU");
     }
 
     @BeforeEach
@@ -31,18 +32,14 @@ public class InsuranceTest {
 
     @Test
     void findVehicleTest() {
-        // given
-
-
-
-        // when
         em.getTransaction().begin();
-        Vehicle vehicle = em.find(Vehicle.class, 1L);
+        Session session = em.unwrap(Session.class);
+        //Vehicle vehicle = session.byNaturalId(Vehicle.class).using("v_plate", "34VG4555").load();
+        Vehicle vehicle = session.bySimpleNaturalId(Vehicle.class).load("34VG4555");
 
-        // then
         assertNotNull(vehicle);
+        assertEquals(vehicle.getV_plate(), "34VG4555");
         em.getTransaction().commit();
     }
-
 
 }

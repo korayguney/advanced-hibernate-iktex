@@ -1,5 +1,7 @@
 package com.iktex.models;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Vehicle {
 
     private String v_model;
     private int v_year;
+    @NaturalId
     private String v_plate;
 
     @ManyToMany
