@@ -1,5 +1,7 @@
 package com.iktex.models;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,10 @@ public class Vehicle {
     private String v_model;
     private int v_year;
     private String v_plate;
+
+    @Formula(value = "year(curdate()) - v_year")
+    private int v_age;
+
 
     @ManyToMany
     private List<Accident> accidentList = new ArrayList<>();

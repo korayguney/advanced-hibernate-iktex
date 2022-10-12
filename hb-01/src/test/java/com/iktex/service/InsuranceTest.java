@@ -31,20 +31,17 @@ public class InsuranceTest {
         emf.close();
     }
 
-    //@Test
-    //void findVehicleTest() {
-    //    // given
+    @Test
+    void findVehicleTest() {
+        em.getTransaction().begin();
+        Vehicle vehicle = em.find(Vehicle.class, 1L);
 
-    //    // when
-    //    em.getTransaction().begin();
-    //    Vehicle vehicle = em.find(Vehicle.class, 1L);
-
-    //    // then
-    //    assertNotNull(vehicle);
-    //    em.getTransaction().commit();
-    //}
+        assertNotNull(vehicle);
+        em.getTransaction().commit();
+    }
 
     @Test
+    @Disabled
     void updateCustomerEntityTest() {
         try {
             em.getTransaction().begin();
