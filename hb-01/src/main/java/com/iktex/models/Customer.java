@@ -1,11 +1,13 @@
 package com.iktex.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,12 @@ public class Customer {
     private Long ssid;
    // @Column(name = "pnumber", columnDefinition = "VARCHAR(100) NOT NULL")
     @Basic(fetch = FetchType.LAZY)
-    private long phoneNumber;
+    private Long phoneNumber;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOfBirth;
+
 
     @OneToMany(mappedBy = "customer")
     private List<Vehicle> vehicleList = new ArrayList<>();
@@ -30,6 +37,22 @@ public class Customer {
     }
 
     public Customer(){}
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -63,11 +86,11 @@ public class Customer {
         this.ssid = ssid;
     }
 
-    public long getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
