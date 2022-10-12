@@ -12,16 +12,18 @@ public class Customer {
     private int id;
     private String firstName;
     private String lastName;
-    private String address;
     private Long ssid;
    // @Column(name = "pnumber", columnDefinition = "VARCHAR(100) NOT NULL")
     @Basic(fetch = FetchType.LAZY)
     private long phoneNumber;
 
+    @OneToOne
+    private Address address;
+
     @OneToMany(mappedBy = "customer")
     private List<Vehicle> vehicleList = new ArrayList<>();
 
-    public Customer(String firstName, String lastName, String address, Long ssid, long phoneNumber) {
+    public Customer(String firstName, String lastName, Address address, Long ssid, long phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -47,11 +49,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
