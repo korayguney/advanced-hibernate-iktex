@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Customer {
+public class Customer extends AbstractBaseClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class Customer {
     private String lastName;
     private String address;
     private Long ssid;
-   // @Column(name = "pnumber", columnDefinition = "VARCHAR(100) NOT NULL")
+    // @Column(name = "pnumber", columnDefinition = "VARCHAR(100) NOT NULL")
     @Basic(fetch = FetchType.LAZY)
     private long phoneNumber;
 
@@ -29,7 +29,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Customer(){}
+    public Customer() {
+    }
 
     public String getFirstName() {
         return firstName;

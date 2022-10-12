@@ -1,8 +1,10 @@
 package com.iktex.models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("1")
 public class Car extends Vehicle {
     private String color;
 

@@ -1,5 +1,6 @@
 package com.iktex.service;
 
+import com.iktex.models.Customer;
 import com.iktex.models.Vehicle;
 import org.junit.jupiter.api.*;
 
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 public class InsuranceTest {
 
@@ -16,7 +18,7 @@ public class InsuranceTest {
 
     @BeforeAll
     public static void setup() {
-        emf = Persistence.createEntityManagerFactory("testPU");
+        emf = Persistence.createEntityManagerFactory("mysqlPU");
     }
 
     @BeforeEach
@@ -29,20 +31,33 @@ public class InsuranceTest {
         emf.close();
     }
 
+    //@Test
+    //void findVehicleTest() {
+    //    // given
+
+    //    // when
+    //    em.getTransaction().begin();
+    //    Vehicle vehicle = em.find(Vehicle.class, 1L);
+
+    //    // then
+    //    assertNotNull(vehicle);
+    //    em.getTransaction().commit();
+    //}
+
     @Test
-    void findVehicleTest() {
-        // given
-
-
-
-        // when
-        em.getTransaction().begin();
-        Vehicle vehicle = em.find(Vehicle.class, 1L);
-
-        // then
-        assertNotNull(vehicle);
-        em.getTransaction().commit();
+    void updateCustomerEntityTest() {
+        try {
+            em.getTransaction().begin();
+            Customer customer = em.find(Customer.class, 1);
+            customer.setUpdatedDate(LocalDateTime.now());
+            em.merge(customer);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException(e);
+        } finally {
+            em.close();
+        }
     }
-
 
 }
