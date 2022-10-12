@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="hb-03" />
         <module name="hb-01" />
         <module name="hb-02" />
       </profile>
@@ -14,6 +15,7 @@
       <module name="advanced-hibernate-iktex" target="17" />
       <module name="hb-01" target="17" />
       <module name="hb-02" target="17" />
+      <module name="hb-03" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,9 +2,9 @@ package com.iktex.clients;
 
 import com.iktex.controller.CustomerController;
 import com.iktex.models.*;
-import com.iktex.utils.EntityManagerUtils;
+import com.iktex.utils.HibernateUtil;
+import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Objects;
@@ -16,11 +16,12 @@ public class InsuranceApiClient {
 
 
         //if (checkTestData())
-        persistTestData();
+         persistTestData();
         // getCustomerList(controller);
         //System.out.println(controller.findCustomer(1));
-        // controller.saveCustomer(new Customer("Mustafa", "Yagmur", "Istanbul", 2345678L, "123423242"));
-        // controller.findAllVehicleOfCustomerWithSSID(111111111L).forEach(System.out::println);
+       // controller.saveCustomer(new Customer("Mustafa", "Yagmur", "Istanbul", 2345678L, "123423242"));
+        System.out.println("********** TEST *************");
+       // controller.findAllVehicleOfCustomerWithSSID(111111111L).forEach(System.out::println);
     }
 
     private static void getCustomerList(CustomerController controller) {
@@ -28,8 +29,8 @@ public class InsuranceApiClient {
     }
 
     private static boolean checkTestData() {
-        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
-        return Objects.isNull(em.find(Customer.class, 1));
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return Objects.isNull(session.find(Customer.class, 1));
     }
 
     private static void persistTestData() {
@@ -59,32 +60,32 @@ public class InsuranceApiClient {
         moto2.getAccidentList().add(accident1);
         moto3.getAccidentList().add(accident2);
 
-        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
-            em.getTransaction().begin();
+            session.getTransaction().begin();
 
-            em.persist(car1);
-            em.persist(car2);
-            em.persist(moto1);
-            em.persist(moto2);
-            em.persist(moto3);
+            session.persist(car1);
+            session.persist(car2);
+            session.persist(moto1);
+            session.persist(moto2);
+            session.persist(moto3);
 
-            em.persist(customer1);
-            em.persist(customer2);
-            em.persist(customer3);
+            session.persist(customer1);
+            session.persist(customer2);
+            session.persist(customer3);
 
-            em.persist(accident1);
-            em.persist(accident2);
-            em.persist(accident3);
+            session.persist(accident1);
+            session.persist(accident2);
+            session.persist(accident3);
 
-            em.getTransaction().commit();
+            session.getTransaction().commit();
             System.out.println("All data persisted...");
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            session.getTransaction().rollback();
             e.printStackTrace();
         } finally {
-            EntityManagerUtils.closeEntityManager(em);
+            session.close();
         }
     }
 }
