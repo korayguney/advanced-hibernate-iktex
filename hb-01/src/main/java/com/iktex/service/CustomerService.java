@@ -21,7 +21,8 @@ public class CustomerService implements CustomerRepository {
 
     @Override
     public Customer findById(int id) {
-        return em.find(Customer.class, id);
+        Customer customer = em.find(Customer.class, id);
+        return customer;
     }
 
     @Override

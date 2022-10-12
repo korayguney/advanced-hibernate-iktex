@@ -18,7 +18,7 @@ public class InsuranceApiClient {
         //if (checkTestData())
         persistTestData();
         // getCustomerList(controller);
-        //System.out.println(controller.findCustomer(1));
+        System.out.println(controller.findCustomer(1));
         // controller.saveCustomer(new Customer("Mustafa", "Yagmur", "Istanbul", 2345678L, "123423242"));
         // controller.findAllVehicleOfCustomerWithSSID(111111111L).forEach(System.out::println);
     }
@@ -28,14 +28,14 @@ public class InsuranceApiClient {
     }
 
     private static boolean checkTestData() {
-        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+        EntityManager em = EntityManagerUtils.getEntityManager("testPU");
         return Objects.isNull(em.find(Customer.class, 1));
     }
 
     private static void persistTestData() {
-        Customer customer1 = new Customer("Ali", "Veli", "Tuzla Istanbul", 111111111L, "123423242");
-        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, "345324523523");
-        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, "777654643563");
+        Customer customer1 = new Customer("Koray", "Veli", "Tuzla Istanbul", 111111111L, 123423242L);
+        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, 345324523523L);
+        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, 777654643563L);
 
         Vehicle car1 = new Car("Hyundai Accent", 2020, "34VG4555", "yellow");
         Vehicle car2 = new Car("Honda Accord", 2018, "34VG111", "black");
@@ -59,7 +59,7 @@ public class InsuranceApiClient {
         moto2.getAccidentList().add(accident1);
         moto3.getAccidentList().add(accident2);
 
-        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+        EntityManager em = EntityManagerUtils.getEntityManager("testPU");
 
         try {
             em.getTransaction().begin();
