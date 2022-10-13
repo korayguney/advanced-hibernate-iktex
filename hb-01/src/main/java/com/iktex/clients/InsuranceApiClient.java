@@ -34,9 +34,16 @@ public class InsuranceApiClient {
     }
 
     private static void persistTestData() {
-        Customer customer1 = new Customer("Koray", "Veli", "Tuzla Istanbul", 111111111L, 123423242L);
-        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, 345324523523L);
-        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, 777654643563L);
+        Address address1 = new Address("details...");
+        Address address2 = new Address("details 1...");
+
+        Customer customer1 = new Customer("Koray", "Veli", 111111111L, 123423242L);
+        Customer customer2 = new Customer("Ayşe", "Turk", 12345678L, 345324523523L);
+        Customer customer3 = new Customer("Hasan", "Simsek", 4444444L, 777654643563L);
+
+        customer1.setAddress(address1);
+        customer2.setAddress(address2);
+        customer3.setAddress(address2);
 
         customer1.setCreatedDate(LocalDateTime.now());
         customer1.setUpdatedDate(LocalDateTime.now());
@@ -73,6 +80,9 @@ public class InsuranceApiClient {
             em.persist(moto1);
             em.persist(moto2);
             em.persist(moto3);
+
+            em.persist(address1);
+            em.persist(address2);
 
             em.persist(customer1);
             em.persist(customer2);
