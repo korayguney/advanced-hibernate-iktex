@@ -1,8 +1,7 @@
-package com.iktex.hb04.models;
+package com.iktex.hb04.models.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Customer extends AbstractBaseClass {
 
     @Id
@@ -24,6 +25,7 @@ public class Customer extends AbstractBaseClass {
     private long phoneNumber;
 
     @OneToMany(mappedBy = "customer")
+    @JsonBackReference
     private List<Vehicle> vehicleList = new ArrayList<>();
 
     public Customer(String firstName, String lastName, String address, Long ssid, long phoneNumber) {

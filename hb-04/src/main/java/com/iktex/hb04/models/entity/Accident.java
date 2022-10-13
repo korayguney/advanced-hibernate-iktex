@@ -1,5 +1,6 @@
-package com.iktex.hb04.models;
+package com.iktex.hb04.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,8 @@ public class Accident extends AbstractBaseClass {
     private Long id;
     private LocalDate accidentDate;
 
-    @ManyToMany(mappedBy = "accidentList")
+    @ManyToMany(mappedBy = "accident")
+    @JsonBackReference
     private List<Vehicle> vehicleList = new ArrayList<>();
 
     public Accident(LocalDate accidentDate) {

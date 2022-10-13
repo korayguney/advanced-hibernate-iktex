@@ -1,4 +1,4 @@
-package com.iktex.hb04.models;
+package com.iktex.hb04.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;

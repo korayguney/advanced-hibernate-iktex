@@ -1,6 +1,6 @@
 package com.iktex.hb04.repositories;
 
-import com.iktex.hb04.models.Vehicle;
+import com.iktex.hb04.models.entity.Vehicle;
 import org.springframework.stereotype.Repository;
 
 @Repository
