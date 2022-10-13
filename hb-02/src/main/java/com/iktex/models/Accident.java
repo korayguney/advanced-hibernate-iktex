@@ -2,8 +2,6 @@ package com.iktex.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Accident {
@@ -12,8 +10,8 @@ public class Accident {
     private Long id;
     private LocalDate accidentDate;
 
-    @ManyToMany(mappedBy = "accidentList")
-    private List<Vehicle> vehicleList = new ArrayList<>();
+    @ManyToOne
+    private VehicleAccident vehicleAccident;
 
     public Accident(LocalDate accidentDate) {
         this.accidentDate = accidentDate;
@@ -30,18 +28,19 @@ public class Accident {
         this.accidentDate = accidentDate;
     }
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
-    }
-
-    public void setVehicleList(List<Vehicle> vehicleList) {
-        this.vehicleList = vehicleList;
-    }
 
     @Override
     public String toString() {
         return "Accident{" +
                 "accidentDate=" + accidentDate +
                 '}';
+    }
+
+    public VehicleAccident getVehicleAccident() {
+        return vehicleAccident;
+    }
+
+    public void setVehicleAccident(VehicleAccident vehicleAccident) {
+        this.vehicleAccident = vehicleAccident;
     }
 }

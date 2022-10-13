@@ -54,11 +54,24 @@ public class InsuranceApiClient {
         Accident accident2 = new Accident(LocalDate.of(2021, Month.AUGUST, 2));
         Accident accident3 = new Accident(LocalDate.of(2020, Month.JANUARY, 22));
 
-        car1.getAccidentList().add(accident1);
-        car2.getAccidentList().add(accident1);
-        moto1.getAccidentList().add(accident3);
-        moto2.getAccidentList().add(accident1);
-        moto3.getAccidentList().add(accident2);
+        VehicleAccident vehicleAccident1 = new VehicleAccident(2500.45);
+        VehicleAccident vehicleAccident2 = new VehicleAccident(135.54);
+        VehicleAccident vehicleAccident3 = new VehicleAccident(2220.33);
+
+        accident1.setVehicleAccident(vehicleAccident1);
+        accident2.setVehicleAccident(vehicleAccident2);
+        accident3.setVehicleAccident(vehicleAccident3);
+
+        car1.setVehicleAccident(vehicleAccident1);
+        car2.setVehicleAccident(vehicleAccident1);
+        moto1.setVehicleAccident(vehicleAccident2);
+        moto1.setVehicleAccident(vehicleAccident3);
+
+       //car1.getAccidentList().add(accident1);
+       //car2.getAccidentList().add(accident1);
+       //moto1.getAccidentList().add(accident3);
+       //moto2.getAccidentList().add(accident1);
+       //moto3.getAccidentList().add(accident2);
 
         Session session = SessionUtil.getSession();
 
@@ -78,6 +91,11 @@ public class InsuranceApiClient {
             session.persist(accident1);
             session.persist(accident2);
             session.persist(accident3);
+
+            session.persist(vehicleAccident1);
+            session.persist(vehicleAccident2);
+            session.persist(vehicleAccident3);
+
 
             session.getTransaction().commit();
             System.out.println("All data persisted...");

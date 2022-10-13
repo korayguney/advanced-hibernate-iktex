@@ -19,6 +19,7 @@
         <mapping class="com.iktex.models.Car"/>
         <mapping class="com.iktex.models.MotorCycle"/>
         <mapping class="com.iktex.models.Accident"/>
+        <mapping class="com.iktex.models.VehicleAccident"/>
         <!--mapping resource="book.hbm.xml" /-->
     </session-factory>
 </hibernate-configuration>

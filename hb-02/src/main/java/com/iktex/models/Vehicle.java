@@ -14,8 +14,8 @@ public class Vehicle {
     private int v_year;
     private String v_plate;
 
-    @ManyToMany
-    private List<Accident> accidentList = new ArrayList<>();
+    @ManyToOne
+    private VehicleAccident vehicleAccident;
 
     @ManyToOne
     private Customer customer;
@@ -61,14 +61,6 @@ public class Vehicle {
         this.v_plate = v_plate;
     }
 
-    public List<Accident> getAccidentList() {
-        return accidentList;
-    }
-
-    public void setAccidentList(List<Accident> accidentList) {
-        this.accidentList = accidentList;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -99,5 +91,13 @@ public class Vehicle {
                 ", v_year=" + v_year +
                 ", v_plate='" + v_plate + '\'' +
                 '}';
+    }
+
+    public VehicleAccident getVehicleAccident() {
+        return vehicleAccident;
+    }
+
+    public void setVehicleAccident(VehicleAccident vehicleAccident) {
+        this.vehicleAccident = vehicleAccident;
     }
 }
