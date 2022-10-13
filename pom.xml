@@ -19,6 +19,7 @@
         <module>hb-01</module>
         <module>hb-02</module>
         <module>hb-03</module>
+        <module>hb-04</module>
     </modules>
 
     <dependencies>
