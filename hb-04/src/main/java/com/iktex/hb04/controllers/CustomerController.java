@@ -30,4 +30,14 @@ public class CustomerController {
         return customerService.saveCustomer(customerDTO);
     }
 
+    @PutMapping("/customers")
+    public boolean updateCustomer(@RequestBody CustomerDTO customerDTO, @RequestParam int id) {
+        return customerService.updateCustomer(customerDTO, id);
+    }
+
+    @DeleteMapping("/customers")
+    public boolean deleteCustomer(@RequestParam int id) {
+        return customerService.deleteCustomer(id);
+    }
+
 }

@@ -13,6 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@NamedQuery(name = "Customer.findByName", query = "FROM Customer WHERE firstName = ?1")
+@NamedNativeQuery(name = "Customer.findByNameNative", query = "SELECT * FROM customer WHERE first_name = ?", resultClass = Customer.class)
+@NamedStoredProcedureQuery(name = "Customer.findByNameSP",
+        procedureName = "GetCustomerDataByName",
+        parameters = {@StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "custName")})
 public class Customer extends AbstractBaseClass {
 
     @Id
