@@ -92,6 +92,7 @@ public class CustomerService {
         if(Objects.nonNull(address)) {
             predicates.add(cb.like(customer.get("address"), "%" + address + "%"));
         }
+
         cq.where(predicates.toArray(new Predicate[0]));
 
         TypedQuery<Customer> query = em.createQuery(cq);

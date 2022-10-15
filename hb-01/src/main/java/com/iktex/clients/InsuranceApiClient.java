@@ -4,24 +4,26 @@ import com.iktex.controller.CustomerController;
 import com.iktex.models.*;
 import com.iktex.utils.EntityManagerUtils;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 import java.util.Objects;
 
 public class InsuranceApiClient {
 
     public static void main(String[] args) {
-      //  CustomerController controller = new CustomerController();
+        //  CustomerController controller = new CustomerController();
 
-
-        //if (checkTestData())
-        persistTestData();
+        //if (checkTestData()) persistTestData();
+        getSolutionOfN1();
         // getCustomerList(controller);
         //   System.out.println(controller.findCustomer(1));
         // controller.saveCustomer(new Customer("Mustafa", "Yagmur", "Istanbul", 2345678L, "123423242"));
-      //  controller.findAllVehicleOfCustomerWithSSID(111111111L).forEach(System.out::println);
+        //  controller.findAllVehicleOfCustomerWithSSID(111111111L).forEach(System.out::println);
     }
 
     private static void getCustomerList(CustomerController controller) {
@@ -34,9 +36,13 @@ public class InsuranceApiClient {
     }
 
     private static void persistTestData() {
-        Customer customer1 = new Customer("Koray", "Veli", "Tuzla Istanbul", 111111111L, 123423242L);
-        Customer customer2 = new Customer("Ayşe", "Turk", "Baku ", 12345678L, 345324523523L);
-        Customer customer3 = new Customer("Hasan", "Simsek", "Bostancı Istanbul", 4444444L, 777654643563L);
+        Address address1 = new Address("Istanbul");
+        Address address2 = new Address("Ankara");
+        Address address3 = new Address("Izmir");
+
+        Customer customer1 = new Customer("Koray", "Veli", address1, 111111111L, 123423242L);
+        Customer customer2 = new Customer("Ayşe", "Turk", address2, 12345678L, 345324523523L);
+        Customer customer3 = new Customer("Hasan", "Simsek", address3, 4444444L, 777654643563L);
 
         customer1.setCreatedDate(LocalDateTime.now());
         customer1.setUpdatedDate(LocalDateTime.now());
@@ -74,6 +80,10 @@ public class InsuranceApiClient {
             em.persist(moto2);
             em.persist(moto3);
 
+            em.persist(address1);
+            em.persist(address2);
+            em.persist(address3);
+
             em.persist(customer1);
             em.persist(customer2);
             em.persist(customer3);
@@ -90,5 +100,45 @@ public class InsuranceApiClient {
         } finally {
             EntityManagerUtils.closeEntityManager(em);
         }
+    }
+
+    private static void getSolutionOfN1() {
+        EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+
+        em.getTransaction().begin();
+        TypedQuery<Customer> query = em.createQuery("FROM Customer", Customer.class);
+        // TypedQuery<Customer> query = em.createQuery("FROM Customer c join fetch c.vehicleList b join fetch c.address join fetch b.customer", Customer.class);
+
+        // EntityGraph<Customer> entityGraph = em.createEntityGraph(Customer.class);
+        // entityGraph.addAttributeNodes("address");
+        // entityGraph.addSubgraph("vehicleList").addAttributeNodes("customer");
+        // query.setHint("javax.persistence.fetchgraph", entityGraph);
+
+        System.out.println("====== 1 ======");
+        List<Customer> customers = query.getResultList();
+        System.out.println("====== 2 ======");
+
+     //   for (Customer customer : customers) {
+     //       System.out.println("====== 3 ======");
+     //       System.out.println(customer.getAddress().getDetail());
+     //       System.out.println("====== 4 ======");
+//
+     //       List<Vehicle> vehicles = customer.getVehicleList();
+     //       System.out.println("====== 5 ======");
+//
+     //       for (Vehicle vehicle : vehicles) {
+     //           System.out.println("====== 6 ======");
+     //           System.out.println(vehicle.getCustomer().getFirstName());
+     //           System.out.println("====== 7 ======");
+     //       }
+     //   }
+     //   System.out.println("====== 8 ======");
+        System.out.println(customers.get(0).getVehicleList().get(0).getV_model());
+
+
+        em.getTransaction().commit();
+        EntityManagerUtils.closeEntityManager(em);
+
+
     }
 }
